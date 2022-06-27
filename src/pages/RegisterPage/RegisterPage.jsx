@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Login.module.css';
+import styles from './RegisterPage.module.css';
 
-function Login() {
+function RegisterPage() {
   return (
     <>
       <form onSubmit={null} className={styles.form}>
@@ -19,26 +19,38 @@ function Login() {
           />
         </label>
         <label className={styles.label}>
-          <span>Number </span>
+          <span>E-mail</span>
+          <input
+            className={styles.input}
+            onChange={null}
+            type="email"
+            name="email"
+            value={null}
+            pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+            required
+            autoComplete="on"
+          />
+        </label>
+        <label className={styles.label}>
+          <span>Password </span>
           <input
             className={styles.input}
             onChange={null}
             value={null}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            type="password"
+            name="password"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
+            autoComplete="on"
           />
         </label>
 
         <button className={styles.btn} type="submit">
-          {' '}
-          Add contact
+          Register me
         </button>
       </form>
     </>
   );
 }
 
-export default Login;
+export default RegisterPage;
