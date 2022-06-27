@@ -1,0 +1,31 @@
+.container {
+  max-width: 1200px;
+  padding: 0px 50px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.header {
+  background-color: #74992e;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid black;
+}
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.link {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-right: 5px;
+  color: black;
+  background-color: orange;
+  font-weight: 700;
+}
