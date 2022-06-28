@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/About.f296d6ea.chunk.js","mappings":"yMAMA,MAJA,WACE,OAAO","sources":["pages/About/About.jsx"],"sourcesContent":["import React from 'react';\n\nfunction About() {\n  return <div>About</div>;\n}\n\nexport default About;\n"],"names":[],"sourceRoot":""}
