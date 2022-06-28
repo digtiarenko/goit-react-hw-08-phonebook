@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './LoginPage.module.css';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../redux/auth/authOperations';
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChange = event => {
+    const { value, name } = event.target;
+    switch (name) {
+      case 'email':
+        return setEmail(value);
+      case 'password':
+        return setPassword(value);
+      default:
+        break;
+    }
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    dispatch(logIn({ email, password }));
+    setEmail('');
+    setPassword('');
+  };
+
   return (
     <>
-      <form onSubmit={null} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.label}>
           <span>E-mail</span>
           <input
             className={styles.input}
-            onChange={null}
+            onChange={handleChange}
             type="email"
             name="email"
-            value={null}
-            pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+            value={email}
+            pattern="\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z"
             required
             autoComplete="on"
           />
@@ -22,8 +47,8 @@ function LoginPage() {
           <span>Password </span>
           <input
             className={styles.input}
-            onChange={null}
-            value={null}
+            onChange={handleChange}
+            value={password}
             type="password"
             name="password"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
