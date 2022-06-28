@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { RotatingSquare } from 'react-loader-spinner';
 import ContactItem from '../ContactItem';
-import { useGetContactsQuery } from '../../redux/contactsSlice';
+import { useGetContactsQuery } from '../../redux/contacts/contactsSlice';
 
 function ContactList() {
   const filterValue = useSelector(state => state.filter);

@@ -2,7 +2,7 @@ import styles from './ContactItem.module.css';
 // import { useDispatch } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import { useDeleteContactMutation } from '../../redux/contactsSlice';
+import { useDeleteContactMutation } from '../../redux/contacts/contactsSlice';
 
 const ContactItem = ({ id, phone, name }) => {
   // const dispatch = useDispatch();

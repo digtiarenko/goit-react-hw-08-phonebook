@@ -13,12 +13,18 @@ const SharedLayout = () => {
           <NavLink className={styles.link} to="/">
             <Logo />
           </NavLink>
-          <NavLink className={styles.link} to="/login">
-            Login
-          </NavLink>
-          <NavLink className={styles.link} to="/register">
-            Register
-          </NavLink>
+          <div className={styles.authMenu}>
+            <NavLink className={styles.link} to="/login">
+              Login
+            </NavLink>
+            <NavLink className={styles.link} to="/register">
+              Register
+            </NavLink>
+          </div>
+          <div className={styles.userMenu}>
+            <p>Hi, username</p>
+            <button type="button"> Log Out</button>
+          </div>
         </nav>
       </header>
       <Outlet />
