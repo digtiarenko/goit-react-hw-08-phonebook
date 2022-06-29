@@ -12,7 +12,7 @@ const SharedLayout = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <nav className={styles.nav}>
-          <NavLink className={styles.link} to="/login">
+          <NavLink className={styles.link} to="contacts">
             My Contacts
           </NavLink>
           <NavLink className={styles.link} to="/">

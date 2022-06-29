@@ -30,8 +30,8 @@ function ContactList() {
       )}
       {contacts && (
         <ul>
-          {getFilteredContacts.map(({ phone, name, id }) => (
-            <ContactItem phone={phone} name={name} key={id} id={id} />
+          {getFilteredContacts.map(({ number, name, id }) => (
+            <ContactItem phone={number} name={name} key={id} id={id} />
           ))}{' '}
         </ul>
       )}

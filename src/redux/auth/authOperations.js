@@ -42,3 +42,23 @@ export const logOut = createAsyncThunk('auth/logOut', async () => {
     // Handle Error
   }
 });
+
+export const refreshCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      console.log('no token - no login');
+      return;
+    }
+    token.set(persistedToken);
+
+    try {
+      const { data } = await axios.get('users/current');
+      console.log(data);
+    } catch (error) {
+      // Handle Error
+    }
+  },
+);
