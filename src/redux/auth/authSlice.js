@@ -30,7 +30,8 @@ export const authSlice = createSlice({
     },
 
     [refreshCurrentUser.fulfilled](state, { payload }) {
-      state.user = payload.user;
+      state.user = payload;
+
       state.isLoggedIn = true;
     },
   },

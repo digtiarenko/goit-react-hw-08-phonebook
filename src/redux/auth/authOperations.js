@@ -48,15 +48,17 @@ export const refreshCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
+
     if (persistedToken === null) {
       console.log('no token - no login');
-      return;
+      // return state
+      return thunkAPI.rejectWithValue("Error! You don't have a token");
     }
-    token.set(persistedToken);
 
+    token.set(persistedToken);
     try {
       const { data } = await axios.get('users/current');
-      console.log(data);
+      return data;
     } catch (error) {
       // Handle Error
     }
