@@ -1,10 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy, useEffect } from 'react';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import SharedLayout from './SharedLayout';
-import Skeleton from './Skeleton';
 import { useDispatch } from 'react-redux';
 import { refreshCurrentUser } from 'redux/auth/authOperations';
+import SharedLayout from './SharedLayout';
+import Skeleton from './Skeleton';
+import { PrivateRoute } from './PrivateRoute/PrivateRoute';
+import { PublicRoute } from './PublicRoute/PublicRoute';
+
 const About = lazy(() =>
   import('../pages/About' /*webpackChunkName: "About"*/),
 );
@@ -30,9 +33,19 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<About />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="contacts" element={<ContactsPage />} />
+
+          <Route element={<PublicRoute restricted />}>
+            <Route path="login" element={<LoginPage />} />
+          </Route>
+
+          <Route element={<PublicRoute restricted />}>
+            <Route path="register" element={<RegisterPage />} />
+          </Route>
+
+          <Route element={<PrivateRoute />}>
+            <Route path="contacts" element={<ContactsPage />} />
+          </Route>
+
           <Route path="*" element={<h1>NOT FOUND</h1>} />
         </Route>
       </Routes>

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../ContactForm/ContactForm.module.css';
-import { filterReducer } from '../../redux/Filter/filterSlice';
+import { changeFilter } from '../../redux/Filter/filterSlice';
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ export default function Filter() {
 
   const onChangeFilter = event => {
     const { value } = event.target;
-    dispatch(filterReducer(value));
+    dispatch(changeFilter(value));
   };
 
   return (

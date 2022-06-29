@@ -38,7 +38,7 @@ function LoginPage() {
             type="email"
             name="email"
             value={email}
-            pattern="\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z"
+            pattern="[\-\w~!$%\^&*=+}{\'?]+(\.[\-\w~!$%\^&*=+}{\'?]+)*@([\w][\-a-zA-Z0-9_]*(\.[\-\w]+)*\.([cC][oO][mM]|[gG][oO][vV]))(:[0-9]{1,5})?]"
             required
             autoComplete="on"
           />

@@ -1,6 +1,6 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 
-const changeFilter = createAction('contact/changeFilter');
+export const changeFilter = createAction('contact/changeFilter');
 
 export const filterReducer = createReducer('', {
   [changeFilter]: (_, { payload }) => payload,
