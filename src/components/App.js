@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy, useEffect } from 'react';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { refreshCurrentUser } from 'redux/auth/authOperations';
 import SharedLayout from './SharedLayout';
 import Skeleton from './Skeleton';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
+import { getIsLoading } from 'redux/auth/authSelectors';
 
 const About = lazy(() =>
   import('../pages/About' /*webpackChunkName: "About"*/),
@@ -23,33 +24,36 @@ const ContactsPage = lazy(() =>
 
 function App() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
 
   useEffect(() => {
     dispatch(refreshCurrentUser());
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<Skeleton />}>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<About />} />
+    !isLoading && (
+      <Suspense fallback={<Skeleton />}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<About />} />
 
-          <Route element={<PublicRoute restricted />}>
-            <Route path="login" element={<LoginPage />} />
+            <Route element={<PublicRoute restricted />}>
+              <Route path="login" element={<LoginPage />} />
+            </Route>
+
+            <Route element={<PublicRoute restricted />}>
+              <Route path="register" element={<RegisterPage />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path="contacts" element={<ContactsPage />} />
+            </Route>
+
+            <Route path="*" element={<h1>NOT FOUND</h1>} />
           </Route>
-
-          <Route element={<PublicRoute restricted />}>
-            <Route path="register" element={<RegisterPage />} />
-          </Route>
-
-          <Route element={<PrivateRoute />}>
-            <Route path="contacts" element={<ContactsPage />} />
-          </Route>
-
-          <Route path="*" element={<h1>NOT FOUND</h1>} />
-        </Route>
-      </Routes>
-    </Suspense>
+        </Routes>
+      </Suspense>
+    )
   );
 
   // return (
