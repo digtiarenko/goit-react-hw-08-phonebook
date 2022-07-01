@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import styles from '../ContactForm/ContactForm.module.css';
 import { changeFilter } from '../../redux/Filter/filterSlice';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -12,20 +13,38 @@ export default function Filter() {
   };
 
   return (
-    <div className={styles.form}>
-      <label className={styles.label}>
-        <span>Find contacts by name</span>
-        <input
-          className={styles.input}
-          onChange={onChangeFilter}
-          type="text"
-          name="name"
-          value={filterValue}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-      </label>
-    </div>
+    <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField
+        onChange={onChangeFilter}
+        id="standard-helperText"
+        helperText="Find contact by name"
+        variant="standard"
+        value={filterValue}
+        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+      />
+    </Box>
+
+    // <div className={styles.form}>
+    //   <label className={styles.label}>
+    //     <span>Find contacts by name</span>
+    //     <input
+    //       className={styles.input}
+    //       onChange={onChangeFilter}
+    //       type="text"
+    //       name="name"
+    //       value={filterValue}
+    //       pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+    //       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+    //       required
+    //     />
+    //   </label>
+    // </div>
   );
 }

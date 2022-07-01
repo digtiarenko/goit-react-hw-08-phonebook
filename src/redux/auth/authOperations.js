@@ -5,11 +5,11 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const token = {
   set(token) {
-    console.log('token set');
+    // console.log('token set');
     axios.defaults.headers.common['Authorization'] = token;
   },
   unset() {
-    console.log('token unset');
+    // console.log('token unset');
     axios.defaults.headers.common['Authorization'] = '';
   },
 };
@@ -50,7 +50,6 @@ export const refreshCurrentUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      console.log('no token - no login');
       // return state
       return thunkAPI.rejectWithValue("Error! You don't have a token");
     }

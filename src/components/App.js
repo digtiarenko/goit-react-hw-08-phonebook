@@ -4,7 +4,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshCurrentUser } from 'redux/auth/authOperations';
 import SharedLayout from './SharedLayout';
-import Skeleton from './Skeleton';
+import { RotatingSquare } from 'react-loader-spinner';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
 import { getIsLoading } from 'redux/auth/authSelectors';
@@ -32,7 +32,7 @@ function App() {
 
   return (
     !isLoading && (
-      <Suspense fallback={<Skeleton />}>
+      <Suspense fallback={<RotatingSquare />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<About />} />

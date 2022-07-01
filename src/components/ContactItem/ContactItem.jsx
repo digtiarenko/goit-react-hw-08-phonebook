@@ -1,5 +1,11 @@
-import styles from './ContactItem.module.css';
-// import { useDispatch } from 'react-redux';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import PersonIcon from '@mui/icons-material/Person';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from '../../redux/contacts/contactsSlice';
@@ -9,18 +15,26 @@ const ContactItem = ({ id, phone, name }) => {
   const [deleteContact, { isLoading }] = useDeleteContactMutation();
 
   return (
-    <li key={id} className={styles.listUnit}>
-      <span className={styles.span}>
-        {name}: {phone}
-      </span>
-      <button
-        disabled={isLoading}
-        onClick={() => deleteContact(id)}
-        type="button"
-      >
-        Delete
-      </button>
-    </li>
+    <ListItem
+      secondaryAction={
+        <IconButton
+          disabled={isLoading}
+          onClick={() => deleteContact(id)}
+          type="button"
+          edge="end"
+          aria-label="delete"
+        >
+          <DeleteIcon />
+        </IconButton>
+      }
+    >
+      <ListItemAvatar>
+        <Avatar>
+          <PersonIcon />
+        </Avatar>
+      </ListItemAvatar>
+      <ListItemText primary={name} secondary={phone} />
+    </ListItem>
   );
 };
 

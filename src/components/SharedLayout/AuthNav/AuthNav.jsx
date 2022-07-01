@@ -1,17 +1,28 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styles from './AuthNav.module.css';
+import { Link, NavLink } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 function AuthNav() {
   return (
-    <div className={styles.authMenu}>
-      <NavLink className={styles.link} to="/login">
-        Login
+    <Box
+      sx={{
+        flexShrink: 1,
+        alignSelf: 'flex-end',
+        display: { xs: 'flex', sm: 'flex' },
+      }}
+    >
+      <NavLink to="login">
+        <Button key="LogIn" sx={{ my: 2, color: 'white', display: 'block' }}>
+          Log in
+        </Button>
       </NavLink>
-      <NavLink className={styles.link} to="/register">
-        Register
-      </NavLink>
-    </div>
+      <Link to="register">
+        <Button key="Register" sx={{ my: 2, color: 'white', display: 'block' }}>
+          Register
+        </Button>
+      </Link>
+    </Box>
   );
 }
 
