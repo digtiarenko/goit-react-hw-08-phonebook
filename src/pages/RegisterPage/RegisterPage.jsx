@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styles from './RegisterPage.module.css';
+import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/authOperations';
 
