@@ -24,6 +24,13 @@ export default function LoginPage() {
     dispatch(logIn({ email, password }));
   };
 
+  // const handleValidation = e => {
+  //   const reg = new RegExp('[a-z]');
+  //   setValid(reg.test(e.target.value));
+  //   setValue(e.target.value);
+  //   console.log(valid);
+  // };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -49,6 +56,7 @@ export default function LoginPage() {
               fullWidth
               label="Email Address"
               id="email"
+              type="email"
               name="email"
               autoComplete="email"
               autoFocus
