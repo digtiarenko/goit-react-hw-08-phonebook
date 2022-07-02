@@ -3,7 +3,7 @@ import { getUserName } from '../../../redux/auth/authSelectors';
 import { logOut } from '../../../redux/auth/authOperations';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function UserMenu() {
   const userName = useSelector(getUserName);
@@ -30,17 +30,16 @@ function UserMenu() {
       >
         Hi, {userName} |
       </p>
-      <Link to="register">
-        <Button
-          key="Register"
-          onClick={() => {
-            dispatch(logOut());
-          }}
-          sx={{ my: 2, color: 'white', display: 'block' }}
-        >
-          Log Out
-        </Button>
-      </Link>
+
+      <Button
+        key="Register"
+        onClick={() => {
+          dispatch(logOut());
+        }}
+        sx={{ my: 2, color: 'white', display: 'block' }}
+      >
+        Log Out
+      </Button>
     </Box>
   );
 }
