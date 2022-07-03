@@ -20,7 +20,7 @@ export const register = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      console.log(error.response.data.errors);
+      // console.log(error.response.data.errors);
       return rejectWithValue(error.response);
     }
   },
@@ -34,7 +34,7 @@ export const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       return rejectWithValue(error.response.statusText);
     }
   },
@@ -45,8 +45,8 @@ export const logOut = createAsyncThunk('auth/logOut', async () => {
     await axios.post('users/logout');
     token.unset();
   } catch (error) {
-    // return rejectWithValue(error.response.statusText);
-    console.log(error);
+    // return rejectWithValue(error.response.statusText);git add
+    // console.log(error);
   }
 });
 
