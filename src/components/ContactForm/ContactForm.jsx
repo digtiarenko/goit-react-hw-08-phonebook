@@ -45,7 +45,7 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
     >
       <TextField
-        inputProps={{ pattern: '[a-z]' }}
+        // inputProps={{ pattern: '[a-z]' }}
         required
         autoFocus
         id="name"
