@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+const { REACT_APP_DB_BASE_URL } = process.env;
+axios.defaults.baseURL = REACT_APP_DB_BASE_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 const token = {
   set(token) {
-    axios.defaults.headers.common['Authorization'] = token;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   },
   unset() {
     axios.defaults.headers.common['Authorization'] = '';
@@ -40,28 +41,30 @@ export const logIn = createAsyncThunk(
   },
 );
 
-export const logOut = createAsyncThunk('auth/logOut', async () => {
-  try {
-    await axios.post('users/logout');
-    token.unset();
-  } catch (error) {
-    // return rejectWithValue(error.response.statusText);git add
-    // console.log(error);
-  }
-});
+export const logOut = createAsyncThunk(
+  'auth/logout',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      await axios.get('users/logout', credentials);
+      token.unset();
+    } catch (error) {
+      // console.log(error);
+      return rejectWithValue(error.response.statusText);
+    }
+  },
+);
 
 export const refreshCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-
     if (persistedToken === null) {
       // return state
       return thunkAPI.rejectWithValue("Error! You don't have a token");
     }
-
     token.set(persistedToken);
+
     try {
       const { data } = await axios.get('users/current');
       return data;

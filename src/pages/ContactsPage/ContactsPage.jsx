@@ -1,17 +1,15 @@
-// import { Modal } from 'components/Modal';
-import React from 'react';
-import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
+import { Box } from '@mui/material';
 
 function ContactsPage() {
   return (
-    <div>
+    <Box>
       {/* <Modal></Modal> */}
-      <ContactForm />
+      {/* <ContactForm /> */}
       <Filter />
       <ContactList />
-    </div>
+    </Box>
   );
 }
 

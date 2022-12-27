@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axios from 'axios';
+const { REACT_APP_DB_BASE_URL } = process.env;
 
 const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: '' }) =>
@@ -12,19 +13,19 @@ const axiosBaseQuery =
 export const contactsApi = createApi({
   reducerPath: 'contacts',
   baseQuery: axiosBaseQuery({
-    baseUrl: 'https://connections-api.herokuapp.com/',
+    baseUrl: REACT_APP_DB_BASE_URL,
   }),
   tagTypes: ['Contacts'],
 
   endpoints: builder => ({
     getContacts: builder.query({
-      query: () => ({ url: 'contacts', method: 'GET' }),
+      query: () => ({ url: '/contacts', method: 'GET' }),
       keepUnusedDataFor: 1,
       providesTags: ['Contacts'],
     }),
     addContact: builder.mutation({
       query: data => ({
-        url: 'contacts',
+        url: '/contacts',
         method: 'POST',
         data,
       }),
@@ -32,7 +33,7 @@ export const contactsApi = createApi({
     }),
     deleteContact: builder.mutation({
       query: id => ({
-        url: `contacts/${id}`,
+        url: `/contacts/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Contacts'],

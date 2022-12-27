@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { RotatingSquare } from 'react-loader-spinner';
 import ContactItem from '../ContactItem';
 import { useGetContactsQuery } from '../../redux/contacts/contactsSlice';
-
-import * as React from 'react';
-
-import List from '@mui/material/List';
-import Box from '@mui/material/Box';
+import { List, Box, Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import AddContactModal from 'components/addContactModal/AddContactModal';
 
 function ContactList() {
   const filterValue = useSelector(state => state.filter);
   const { data: contacts, isLoading } = useGetContactsQuery();
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
 
   const getFilteredContacts = useMemo(
     () =>
@@ -25,27 +25,51 @@ function ContactList() {
   );
 
   return (
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
+    <Box>
+      <AddContactModal open={open} handleClose={closeModal} />
       {isLoading && (
-        <RotatingSquare
-          ariaLabel="rotating-square"
-          visible={true}
-          color="grey"
-        />
+        <Box
+          sx={{
+            position: 'absolute',
+            display: 'flex',
+          }}
+        >
+          <RotatingSquare
+            ariaLabel="rotating-square"
+            visible={true}
+            color="grey"
+          />
+        </Box>
       )}
       {contacts && (
-        <List>
-          {getFilteredContacts.map(({ number, name, id }) => (
-            <ContactItem phone={number} name={name} key={id} id={id} />
-          ))}
-        </List>
+        <Box className="box">
+          <Fab
+            onClick={() => setOpen(true)}
+            component="button"
+            variant="extended"
+            sx={{
+              position: 'fixed',
+              left: '42%',
+              bottom: '100px',
+            }}
+            color="primary"
+            aria-label="add"
+          >
+            <AddIcon sx={{ mr: 1 }} />
+            Add contact
+          </Fab>
+          <List sx={{ bgcolor: 'background.paper' }}>
+            {getFilteredContacts.map(({ phone, name, _id, email }) => (
+              <ContactItem
+                phone={phone}
+                name={name}
+                email={email}
+                key={_id}
+                id={_id}
+              />
+            ))}
+          </List>
+        </Box>
       )}
     </Box>
   );

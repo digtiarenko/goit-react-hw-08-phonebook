@@ -15,12 +15,12 @@ const SharedLayout = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Container maxWidth="lg">
+      <AppBar position="sticky">
+        <Container maxWidth="sm">
           <Toolbar disableGutters>
             <Link
               style={{
-                display: { xs: 'flex' },
+                // display: { xs: "flex" },
                 flexGrow: 1,
                 fontFamily: 'monospace',
                 fontSize: 24,
@@ -34,11 +34,22 @@ const SharedLayout = () => {
               PHONEBOOK
             </Link>
 
-            <Box sx={{ flexGrow: 2, display: { xs: 'flex', sm: 'flex' } }}>
-              <NavLink to="contacts">
+            <Box
+              sx={{
+                flexGrow: 4,
+                display: { xs: 'flex', sm: 'flex' },
+                justifyContent: 'flex-start',
+              }}
+            >
+              <NavLink to="contacts" style={{ textDecoration: 'none' }}>
                 <Button
                   key="Contacts"
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{
+                    my: 2,
+                    color: 'white',
+                    display: 'block',
+                    textDecoration: 'none',
+                  }}
                 >
                   My contacts
                 </Button>
@@ -48,7 +59,7 @@ const SharedLayout = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="lg">
+      <Container maxWidth="sm">
         <Outlet />
       </Container>
     </>
