@@ -1,13 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy, useEffect } from 'react';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshCurrentUser } from 'redux/auth/authOperations';
 import SharedLayout from './SharedLayout';
-import { RotatingSquare } from 'react-loader-spinner';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
 import { getIsLoading } from 'redux/auth/authSelectors';
+import Spinner from './spinner/Spinner';
 
 const About = lazy(() =>
   import('../pages/About' /*webpackChunkName: "About"*/),
@@ -32,7 +31,7 @@ function App() {
 
   return (
     !isLoading && (
-      <Suspense fallback={<RotatingSquare />}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<About />} />

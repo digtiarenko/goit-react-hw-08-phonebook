@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useMemo, useState } from 'react';
-import { RotatingSquare } from 'react-loader-spinner';
+// import { RotatingSquare } from 'react-loader-spinner';
 import ContactItem from '../ContactItem';
 import { useGetContactsQuery } from '../../redux/contacts/contactsSlice';
-import { List, Box, Fab } from '@mui/material';
+import { List, Box, Fab, Backdrop, CircularProgress } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import AddContactModal from 'components/addContactModal/AddContactModal';
 
@@ -26,21 +26,12 @@ function ContactList() {
 
   return (
     <Box>
-      <AddContactModal open={open} handleClose={closeModal} />
       {isLoading && (
-        <Box
-          sx={{
-            position: 'absolute',
-            display: 'flex',
-          }}
-        >
-          <RotatingSquare
-            ariaLabel="rotating-square"
-            visible={true}
-            color="grey"
-          />
-        </Box>
+        <Backdrop sx={{ color: '#fff', zIndex: 10 }} open>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       )}
+      <AddContactModal open={open} handleClose={closeModal} />
       {contacts && (
         <Box className="box">
           <Fab

@@ -27,7 +27,8 @@ export default function ContactForm() {
     phone: yup
       .string()
       .matches(phoneRegEx, 'Phone number is not valid')
-      .min(8, 'Phone number should be of minimum 8 characters length')
+      .min(8, 'Phone number should be of minimum 8 characters')
+      .max(20, 'Phone number should be of maximum 20 characters')
       .required('Phone number is required'),
   });
   const formik = useFormik({
