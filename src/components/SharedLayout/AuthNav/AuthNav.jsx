@@ -12,12 +12,12 @@ function AuthNav() {
         display: { xs: 'flex', sm: 'flex' },
       }}
     >
-      <NavLink to="login">
+      <NavLink to="login" style={{ textDecoration: 'none' }}>
         <Button key="LogIn" sx={{ my: 2, color: 'white', display: 'block' }}>
           Log in
         </Button>
       </NavLink>
-      <Link to="register">
+      <Link to="register" style={{ textDecoration: 'none' }}>
         <Button key="Register" sx={{ my: 2, color: 'white', display: 'block' }}>
           Register
         </Button>

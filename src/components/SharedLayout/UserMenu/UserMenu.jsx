@@ -17,19 +17,20 @@ function UserMenu() {
         display: { xs: 'flex', sm: 'flex' },
       }}
     >
-      <p
-        variant="h6"
-        component="a"
-        href="/"
-        style={{
-          fontFamily: 'monospace',
-          fontWeight: 700,
-          color: 'inherit',
-          textDecoration: 'none',
-        }}
-      >
-        Hi, {userName} |
-      </p>
+      <Box sx={{ display: { sm: 'flex', xs: 'none' } }}>
+        <p
+          variant="h6"
+          component="a"
+          style={{
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >
+          Hi, {userName} |
+        </p>
+      </Box>
 
       <Button
         key="Register"

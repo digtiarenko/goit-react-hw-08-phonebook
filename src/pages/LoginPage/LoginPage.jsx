@@ -1,35 +1,50 @@
-import { useDispatch } from 'react-redux';
-import { logIn } from '../../redux/auth/authOperations';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  Grid,
+  Link,
+  TextField,
+  Box,
+  Typography,
+  Container,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { logIn } from '../../redux/auth/authOperations';
 const theme = createTheme();
 
 export default function LoginPage() {
+  const emailRegexp = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
   const dispatch = useDispatch();
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
-    dispatch(logIn({ email, password }));
-  };
-
-  // const handleValidation = e => {
-  //   const reg = new RegExp('[a-z]');
-  //   setValid(reg.test(e.target.value));
-  //   setValue(e.target.value);
-  //   console.log(valid);
-  // };
+  const validationSchema = yup.object({
+    email: yup
+      .string('Enter your email')
+      .matches(emailRegexp, 'Phone number is not valid')
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string()
+      .min(6, 'Password number should be of minimum 6 characters')
+      .max(20, 'Password should be of maximum 20 characters')
+      .required('Password is required'),
+  });
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values, { resetForm }) => {
+      dispatch(logIn(values));
+      resetForm();
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -49,7 +64,12 @@ export default function LoginPage() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={formik.handleSubmit}
+            Validate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -58,6 +78,10 @@ export default function LoginPage() {
               id="email"
               type="email"
               name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
               autoComplete="email"
               autoFocus
             />
@@ -65,6 +89,10 @@ export default function LoginPage() {
               margin="normal"
               required
               fullWidth
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
               name="password"
               label="Password"
               type="password"
