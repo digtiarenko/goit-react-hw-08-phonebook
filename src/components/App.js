@@ -5,7 +5,7 @@ import { refreshCurrentUser } from 'redux/auth/authOperations';
 import SharedLayout from './SharedLayout';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
-import { getIsLoading } from 'redux/auth/authSelectors';
+import { getIsLoading, getIsLoggedIn } from 'redux/auth/authSelectors';
 import Spinner from './spinner/Spinner';
 
 const About = lazy(() =>
@@ -24,10 +24,12 @@ const ContactsPage = lazy(() =>
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
-
+  const isLoggedIn = useSelector(getIsLoggedIn);
   useEffect(() => {
-    dispatch(refreshCurrentUser());
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(refreshCurrentUser());
+    }
+  }, [dispatch, isLoggedIn]);
 
   return (
     !isLoading && (
