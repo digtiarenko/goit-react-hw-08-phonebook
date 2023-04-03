@@ -26,7 +26,8 @@ function App() {
   const isLoading = useSelector(getIsLoading);
   const isLoggedIn = useSelector(getIsLoggedIn);
   useEffect(() => {
-    if (isLoggedIn) {
+    console.log('checking if logged');
+    if (!isLoggedIn) {
       dispatch(refreshCurrentUser());
     }
   }, [dispatch, isLoggedIn]);
@@ -39,15 +40,15 @@ function App() {
             <Route index element={<About />} />
 
             <Route element={<PublicRoute restricted />}>
-              <Route path="login" element={<LoginPage />} />
+              <Route path="/login" element={<LoginPage />} />
             </Route>
 
             <Route element={<PublicRoute restricted />}>
-              <Route path="register" element={<RegisterPage />} />
+              <Route path="/register" element={<RegisterPage />} />
             </Route>
 
             <Route element={<PrivateRoute />}>
-              <Route path="contacts" element={<ContactsPage />} />
+              <Route path="/contacts" element={<ContactsPage />} />
             </Route>
 
             <Route path="*" element={<h1>NOT FOUND</h1>} />

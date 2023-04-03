@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 const { REACT_APP_DB_BASE_URL } = process.env;
+
 axios.defaults.baseURL = REACT_APP_DB_BASE_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -59,7 +60,9 @@ export const refreshCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
+    console.log('persistedToken:', persistedToken);
     if (persistedToken === null) {
+      console.log('persistedToken:', persistedToken);
       // return state
       return thunkAPI.rejectWithValue("Error! You don't have a token");
     }

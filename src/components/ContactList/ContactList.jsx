@@ -32,23 +32,23 @@ function ContactList() {
         </Backdrop>
       )}
       <AddContactModal open={open} handleClose={closeModal} />
+      <Fab
+        onClick={() => setOpen(true)}
+        component="button"
+        variant="extended"
+        sx={{
+          position: 'fixed',
+          left: '42%',
+          bottom: '100px',
+        }}
+        color="primary"
+        aria-label="add"
+      >
+        <AddIcon sx={{ mr: 1 }} />
+        Add contact
+      </Fab>
       {contacts && (
         <Box className="box">
-          <Fab
-            onClick={() => setOpen(true)}
-            component="button"
-            variant="extended"
-            sx={{
-              position: 'fixed',
-              left: '42%',
-              bottom: '100px',
-            }}
-            color="primary"
-            aria-label="add"
-          >
-            <AddIcon sx={{ mr: 1 }} />
-            Add contact
-          </Fab>
           <List sx={{ bgcolor: 'background.paper' }}>
             {getFilteredContacts.map(({ phone, name, _id, email }) => (
               <ContactItem
