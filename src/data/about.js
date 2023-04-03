@@ -1,6 +1,6 @@
 export const aboutContent = {
   frontend:
-    'A response MPA with basic phonebook functionality. \nReact + Material.ui. Redux + Redux Toolkit + RTK Query serves as state manager',
+    'A response SPA with basic phonebook functionality. \nReact + Material.ui. Redux + Redux Toolkit + RTK Query serves as state manager',
 
   backend:
     ' WebServer [Node.js + Express] in connection with MongoDB. DAL is implemented',
