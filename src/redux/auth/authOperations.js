@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-const { REACT_APP_DB_BASE_URL } = process.env;
+// const { REACT_APP_DB_BASE_URL } = process.env;
 
-axios.defaults.baseURL = REACT_APP_DB_BASE_URL;
+axios.defaults.baseURL = 'https://phonebook-back.herokuapp.com/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const token = {
