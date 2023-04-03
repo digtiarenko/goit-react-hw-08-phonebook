@@ -26,7 +26,6 @@ function App() {
   const isLoading = useSelector(getIsLoading);
   const isLoggedIn = useSelector(getIsLoggedIn);
   useEffect(() => {
-    console.log('checking if logged');
     if (!isLoggedIn) {
       dispatch(refreshCurrentUser());
     }

@@ -36,7 +36,7 @@ export const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      // console.log(error.message);
+      console.log(error.message);
       return rejectWithValue(error.response.statusText);
     }
   },
@@ -49,7 +49,7 @@ export const logOut = createAsyncThunk(
       await axios.get('users/logout', credentials);
       token.unset();
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       return rejectWithValue(error.response.statusText);
     }
   },
@@ -60,9 +60,7 @@ export const refreshCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-    console.log('persistedToken:', persistedToken);
     if (persistedToken === null) {
-      console.log('persistedToken:', persistedToken);
       // return state
       return thunkAPI.rejectWithValue("Error! You don't have a token");
     }
